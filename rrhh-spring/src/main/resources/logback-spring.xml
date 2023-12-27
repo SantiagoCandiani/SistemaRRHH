@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%thread] %-5level: %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
+        <!-- EXPLICACION DEL ARCHIVO LOGBACK
+  Logback es una herramienta que los programadores utilizan para registrar lo que está sucediendo mientras se ejecuta un programa12.
+  Esto puede ser muy útil para entender y solucionar problemas. El código que me mostraste es una configuración para Logback.
+  Aquí te explico de manera sencilla qué hace cada parte:
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">: Esta línea dice que los registros se mostrarán en la consola de tu computadora.
+  <encoder><pattern>[%thread] %-5level: %logger - %msg%n</pattern></encoder>: Esta línea define cómo se verán los registros.
+  Por ejemplo, mostrará el nombre del hilo, el nivel del registro (como ‘info’ o ‘error’), el nombre del registrador y el mensaje del registro.
+  <root level="info"><appender-ref ref="STDOUT"/></root>: Esta línea dice que solo se mostrarán los registros de nivel ‘info’ y superiores.
+  Los niveles de registro son, en orden de menor a mayor gravedad: ‘trace’, ‘debug’, ‘info’, ‘warn’, ‘error’. Entonces, en este caso,
+  se mostrarán los registros ‘info’, ‘warn’ y ‘error’.
+             -->
