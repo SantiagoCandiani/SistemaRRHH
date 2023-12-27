@@ -3,10 +3,7 @@ package scandiani.rrhh.controladores;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import scandiani.rrhh.modelos.Empleado;
 import scandiani.rrhh.servicios.IEmpleadoServicio;
 
@@ -27,6 +24,12 @@ public class EmpleadoControlador {
         var empleados = empleadoServicio.listarEmpleados();
         empleados.forEach(empleado -> logguer.info(empleado.toString()));
         return empleados;
+    }
+
+    @PostMapping("/empleados")
+    public Empleado agregarEmpleado(@RequestBody Empleado empleado) {
+        logguer.info("Empleado a agregar: " + empleado);
+        return empleadoServicio.guardarEmpleado(empleado);
     }
 
 }//Class
