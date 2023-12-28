@@ -9,7 +9,9 @@ import scandiani.rrhh.excepcion.RecursoNoEncontradoExcepcion;
 import scandiani.rrhh.modelos.Empleado;
 import scandiani.rrhh.servicios.IEmpleadoServicio;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("rrhh-app") //http://localhost:8080/rrhh-app/
@@ -46,7 +48,7 @@ public class EmpleadoControlador {
     public ResponseEntity<Empleado> actualizarEmpleado(@PathVariable Integer id, @RequestBody Empleado empleadoRecibido) {
         Empleado empleado = empleadoServicio.buscarEmpleadoPorId(id);
         if (empleado == null)
-            throw new RecursoNoEncontradoExcepcion("El id recibido no existe " + id);
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
         empleado.setNombre(empleadoRecibido.getNombre());
         empleado.setApellido(empleadoRecibido.getApellido());
         empleado.setDni(empleadoRecibido.getDni());
@@ -54,6 +56,18 @@ public class EmpleadoControlador {
         empleado.setSueldo(empleadoRecibido.getSueldo());
         empleadoServicio.guardarEmpleado(empleado);
         return ResponseEntity.ok(empleado);
+    }
+
+    @DeleteMapping("/empleados/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarEmpleado(@PathVariable Integer id) {
+        Empleado empleado = empleadoServicio.buscarEmpleadoPorId(id);
+        if (empleado == null)
+            throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+        empleadoServicio.eliminarEmpleado(empleado);
+        //Json {"eliminado" : "true"}
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 
 
